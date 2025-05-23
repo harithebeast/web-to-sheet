@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web-to-Sheet Logger</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/>
+          <polyline points="7 3 7 8 15 8"/>
+        </svg>
+      </div>
+      <h1>Web-to-Sheet Logger</h1>
+    </div>
+    
+    <div class="content">
+      <div id="setup-view" class="view">
+        <p>Enter your Google Apps Script Web App URL to connect to your Google Sheet:</p>
+        <input type="text" id="script-url" placeholder="https://script.google.com/macros/s/...">
+        <div class="sheet-selector">
+          <label for="sheet-select">Select Sheet:</label>
+          <select id="sheet-select">
+            <option value="default">Default Sheet</option>
+            <option value="secondary">Secondary Sheet</option>
+          </select>
+        </div>
+        <button id="save-settings">Save Settings</button>
+      </div>
+      
+      <div id="main-view" class="view hidden">
+        <p>Highlight text on any webpage and click the floating button to save it to your Google Sheet.</p>
+        <div class="status-container">
+          <div class="status">
+            <span class="status-label">Status:</span>
+            <span id="connection-status">Not connected</span>
+          </div>
+          <button id="change-settings">Change Settings</button>
+        </div>
+        
+        <div class="instructions">
+          <h3>How to use:</h3>
+          <ol>
+            <li>Highlight text on any webpage</li>
+            <li>Click the "Save to Sheet" button that appears</li>
+            <li>Add optional tags in the popup</li>
+            <li>Click "Save" to send to your Google Sheet</li>
+          </ol>
+        </div>
+      </div>
+      
+      <div id="save-view" class="view hidden">
+        <div class="selection-preview">
+          <h3>Selected Text:</h3>
+          <p id="selected-text" class="preview-text"></p>
+        </div>
+        
+        <div class="metadata">
+          <div class="metadata-item">
+            <span class="metadata-label">Page:</span>
+            <span id="page-title" class="metadata-value"></span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">URL:</span>
+            <span id="page-url" class="metadata-value"></span>
+          </div>
+        </div>
+        
+        <div class="tags-container">
+          <label for="tags-input">Tags (comma separated):</label>
+          <input type="text" id="tags-input" placeholder="research, important, follow-up">
+          <div class="tag-suggestions">
+            <span class="tag-suggestion">research</span>
+            <span class="tag-suggestion">important</span>
+            <span class="tag-suggestion">follow-up</span>
+            <span class="tag-suggestion">idea</span>
+            <span class="tag-suggestion">reference</span>
+          </div>
+        </div>
+        
+        <div class="buttons">
+          <button id="cancel-save">Cancel</button>
+          <button id="confirm-save">Save to Sheet</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="status-message" class="status-message"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
